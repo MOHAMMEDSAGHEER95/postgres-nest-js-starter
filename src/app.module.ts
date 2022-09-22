@@ -4,7 +4,9 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import {TypeOrmModule } from '@nestjs/typeorm'
 import { User } from './user/user.entity';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config'
+import { DvsModule } from './dvs/dvs.module';
+import { UserDVS } from './dvs/dvs.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -14,10 +16,11 @@ import { ConfigModule } from '@nestjs/config';
     database: 'nestjs',
     username: 'docker',
     password: 'docker',
-    entities: [User],
+    entities: [User, UserDVS],
     synchronize: true
   }), UserModule,
-  ConfigModule.forRoot()],
+  ConfigModule.forRoot(),
+  DvsModule],
   controllers: [AppController],
   providers: [AppService],
 })
