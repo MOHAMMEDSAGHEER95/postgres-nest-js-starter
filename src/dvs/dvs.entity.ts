@@ -1,5 +1,5 @@
-import { stringify } from "querystring";
-import { Column,PrimaryGeneratedColumn, Entity } from "typeorm";
+
+import { Column,PrimaryGeneratedColumn, Entity, CreateDateColumn } from "typeorm";
 
 export enum DocumentType {
     Passport = "passport",
@@ -10,6 +10,13 @@ export enum Gender {
     Male = "M",
     Female = "F",
     Othere = "X"
+}
+
+export enum Status {
+    Verified = "verified",
+    Limited = "limited",
+    Failed = "failed",
+    Error = "error",
 }
 
 @Entity()
@@ -32,7 +39,18 @@ export class UserDVS{
     }
 
     @Column()
+    documentnumber: string
+
+    @Column()
     cardnumber: string
+
+    @Column({
+        type:"enum",
+        enum: Status
+    })
+    status:{
+        required: true
+    }
 
     @Column({
         type: "date"
@@ -63,10 +81,13 @@ export class UserDVS{
     
     @Column()
     unitno: string
-    
+
     @Column()
     houseno:string
     
     @Column()
     streetname: string
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

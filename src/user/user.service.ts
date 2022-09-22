@@ -11,7 +11,10 @@ export class UserService {
     ){}
 
     findAll(): Promise<User[]>{
-        return this.usersRepository.find();
+        return this.usersRepository.find({select: {
+            firstname: true,
+            lastname: true,
+        },})
     }
 
     insertUser(body){
