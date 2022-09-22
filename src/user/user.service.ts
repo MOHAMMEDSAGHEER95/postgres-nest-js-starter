@@ -14,8 +14,8 @@ export class UserService {
         return this.usersRepository.find();
     }
 
-    insertUser(firstName: string, lastName: string){
-        const userObject = this.usersRepository.create({firstname: firstName, lastname: lastName})
+    insertUser(body){
+        const userObject = this.usersRepository.create({firstname: body.firstName, lastname: body.lastName})
         
         return this.usersRepository.save(userObject)
     }
